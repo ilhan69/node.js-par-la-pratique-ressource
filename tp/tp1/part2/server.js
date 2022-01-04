@@ -1,6 +1,7 @@
 const express = require('express')
-let pingAllPorts = require('./sniffer')
 const app = express()
+let pingAllPorts = require('./sniffer')
+
 const port_min = 3000;
 const port_max = 4000;
 
