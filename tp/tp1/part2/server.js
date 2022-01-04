@@ -7,7 +7,7 @@ const port_max = 4000;
 const port = Math.floor(Math.random()*(port_max-port_min+1)+port_min);
 
 app.get('/ping', (req, res) => {
-  res.setHeader('Content-Type', 'application/json').status(200).send('pong')
+  res.setHeader('Content-Type', 'application/json').status(200).send(JSON.stringify('pong'))
 })
 
 app.listen(port, () => {
