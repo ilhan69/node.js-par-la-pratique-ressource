@@ -15,5 +15,7 @@ app.listen(port, () => {
 })
 
 pingAllPorts().then((data) => {
-    console.log('Le sniffer a détecté le port : '+ data);
+    if(data) {
+        console.log('Le sniffer a détecté le port : '+ data);
+    }
 })
