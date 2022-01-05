@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 let CONFIG = {};
 
 CONFIG.node_env = process.env.NODE_ENV;
