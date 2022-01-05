@@ -63,6 +63,9 @@ exports.deleteUserById = (req,res) => {
     } catch (error) {
         return res.status(500).send('Error, user not found');
     }
-    users[userDeleteIndex] = null;
-    return res.status(200).send({message: 'User deleted'}) 
+    if(userDeleteIndex>=0) {
+        users.splice(userDeleteIndex, 1)
+        return res.status(200).send({message: 'User deleted'}) 
+    }
+    return res.status(404).send({message: 'User not found'}) 
 }

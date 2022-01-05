@@ -4,7 +4,7 @@ const usersRoutes = require('./components/users/userRoutes')
 
 const router = (app) => {
     app.get('/', (req, res) => {
-        res.setHeader('Content-Type', 'application/json').status(200).send(JSON.stringify({message:'Welcome on rest API'}))
+        res.status(200).send({message:'Welcome on rest API'})
     })
     app.use(config.root_api, usersRoutes);
     app.use((req, res) => {

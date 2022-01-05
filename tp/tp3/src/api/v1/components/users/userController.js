@@ -12,7 +12,10 @@ exports.getAllUsers = async (req, res) => {
 exports.getUserById = async (req,res) => {
     try {
         const user = await userModel.find({ id: req.params.userId })
-        return res.status(200).send(user)
+        if(user.length>0) {
+            return res.status(200).send(user)
+        }
+        return res.status(404).send('Error, user not found')
     } catch (error) {
         return res.status(500).send('Error');
     }
@@ -32,7 +35,7 @@ exports.createUser = async (req,res) => {
           role: req.body.role,
         }
         let createdUser = await userModel.create(newUser)
-        return res.setHeader('Content-Type', 'application/json').status(200).send(JSON.stringify(createdUser))
+        return res.status(200).send(createdUser)
     } catch (error) {
         return res.status(500).send('Error');
     }
