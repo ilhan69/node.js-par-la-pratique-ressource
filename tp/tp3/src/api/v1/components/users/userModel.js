@@ -1,4 +1,4 @@
-const mongoose = require('./db');
+const mongoose = require('../../../../config/db');
 const userModel = mongoose.model('User', 
 { 
     id: Number,

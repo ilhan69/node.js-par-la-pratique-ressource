@@ -1,16 +1,14 @@
 
-# TP: 3 Améliorations de l’API, persistance des données et documentation
+# TP: 2 Création d’une API REST
 
+L’objectif est de réaliser une interface permettant de gérer des utilisateurs
 
-L’objectif est de réaliser une interface permettant de gérer des utilisateurs 
-et de persister les données dans une base de données MongoDB. 
+* Mettre en place une API avec le framework express
+* Créer 5 endpoints pour
+	*** Lire la liste de tous les utilisateurs
 
-Il sera également demandé de mettre en place une documentation de votre API avec swagger.
+	* Lire un utilisateur par rapport à son id
 
-* Reprendre la version finale du TP2
-* Mettre en place la connexion à la base de données
-* Créer le Model User
-* Modifier vos endpoints pour qu’ils interagissent avec la base de données
-* Créer et mettre à disposition la documentation de votre api avec swagger
-
-Bonus : Tester unitairement vos controllers (avec Mocha ou JEST)
+	*** Créer un nouvel utilisateur
+	*** Éditer un utilisateur par rapport à son i
+	*** Supprimer un utilisateur par rapport à son id

@@ -1,16 +1,22 @@
-const users = require('./data/UserData')
+const users = require('../users/UserData')
 
-exports.getUserById = (id) => {
+exports.getAllUsers = (req, res) => {
+    return res.status(200).send(users)
+}
+
+exports.getUserById = (req,res) => {
     try {
-        return users.find(u => u.id == id)
+        let user = users.find(u => u.id == req.params.userId)
+        if(user) {
+            return res.status(200).send(user)
+        }
+        return res.status(404).send('User not found')
     } catch (error) {
-        return {message:'Error, User id not found !'};
+        return res.status(500).send('Error');
     }
 }
-exports.getAllUsers = () => {
-    return users;
-}
-exports.createUser = (req) => {
+
+exports.createUser = (req,res) => {
     let newUser = {
         id: users[users.length-1].id+1,
         firstName: req.body.firstName,
@@ -22,23 +28,21 @@ exports.createUser = (req) => {
         role: req.body.role,
       }
     users.push(newUser)
-    return {message:'Success, user created', newUser};
+    return res.status(200).send({message:'Success, user created', newUser})
 }
-exports.updateUserById = (req) => {
-    if(!req.params.userId) {
-        return {message:'Error, User id not specified !'};
-    }
+
+exports.updateUserById = (req, res) => {
     let userUpdated;
     try {
         userUpdated = users.find(u => u.id == req.params.userId);
     } catch (error) {
-        return {message:'Error, User id not found !'};
+        return res.status(500).send({message:'Error'})
     }
     if(!userUpdated) {
-        return {message:'Error, User id not found !'};
+        return res.status(500).send({message:'Error user not found'})
     }
     userUpdated = {
-        id: req.params.userId,
+        id: userUpdated.id,
         firstName: req.body.firstName ?? userUpdated.firstName,
         lastName: req.body.lastName ?? userUpdated.lastName,
         email: req.body.email ?? userUpdated.email,
@@ -49,19 +53,16 @@ exports.updateUserById = (req) => {
     }
     let userUpdatedIndex = users.findIndex(u => u.id == req.params.userId);
     users[userUpdatedIndex] = userUpdated;
-    
-    return {message:'Success! User updated', userUpdated};
+    return res.status(200).send({message:'Success! User updated', userUpdated})
 }
-exports.deleteUserById = (req) => {
-    if(!req.params.userId) {
-        return {message:'Error, User id not specified !'};
-    }
+
+exports.deleteUserById = (req,res) => {
     let userDeleteIndex;
     try {
-        userDeleteIndex = users.findIndex(u => u.id == req.params.userId);   
+        userDeleteIndex = users.findIndex(u => u.id == req.params.userId); 
     } catch (error) {
-        return {message:'Error, User id not found !'};
+        return res.status(500).send('Error, user not found');
     }
     users[userDeleteIndex] = null;
-    return {message:'Success! User deleted'};
+    return res.status(200).send({message: 'User deleted'}) 
 }
